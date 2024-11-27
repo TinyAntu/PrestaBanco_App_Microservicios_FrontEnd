@@ -1,7 +1,9 @@
 import httpClient from "../http-common";
 
+
+//Metodos dentro del Microservicio FollowCredit
 const create = (data) => {
-    return httpClient.post("/api/v1/docs/create", data, {
+    return httpClient.post("/api/docs/create", data, {
         headers: {
             "Content-Type": "application/json"
         }
@@ -9,11 +11,11 @@ const create = (data) => {
 };
 
 const getDocumentsByCreditId = (creditId) => {
-    return httpClient.get(`/api/v1/docs/doclist/${creditId}`);
+    return httpClient.get(`/api/docs/doclist/${creditId}`);
 };
 
 const downloadDocument = (id) => {
-    return httpClient.get(`/api/v1/docs/download/${id}`, {
+    return httpClient.get(`/api/docs/download/${id}`, {
         responseType: 'blob' 
     });
 };

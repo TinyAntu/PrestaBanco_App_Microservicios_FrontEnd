@@ -13,7 +13,6 @@ const CreditApplication = () => {
     const [type, setType] = useState("");
     const [income, setIncome] = useState("");
     const [property_value, setPropertyValue] = useState("");
-    const [amount, setAmount] = useState("");
     const [debt, setDebt] = useState("");
     const [documents, setDocuments] = useState({});
     const navigate = useNavigate();
@@ -73,7 +72,7 @@ const CreditApplication = () => {
         try {
             // Crear el crédito primero
             const creditResponse = await creditService.create({
-                capital, annual_interest, years, type, income, userId, property_value, amount, debt
+                capital, annual_interest, years, type, income, userId, property_value,debt
             });
             console.log("Datos a enviar:", {
                 capital, 
@@ -83,7 +82,6 @@ const CreditApplication = () => {
                 income, 
                 userId, 
                 property_value, 
-                amount, 
                 debt
             });
 
@@ -214,17 +212,7 @@ const CreditApplication = () => {
                             variant="standard"
                             onChange={(e) => setPropertyValue(e.target.value)}
                         />
-                    </FormControl>
-
-                    <FormControl fullWidth>
-                        <TextField
-                            label="Cantidad de prestamo"
-                            type="number"
-                            value={amount}
-                            variant="standard"
-                            onChange={(e) => setAmount(e.target.value)}
-                        />
-                    </FormControl>
+                    </FormControl> 
 
                     <FormControl fullWidth>
                         <TextField
