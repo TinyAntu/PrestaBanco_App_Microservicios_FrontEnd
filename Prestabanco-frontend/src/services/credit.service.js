@@ -15,7 +15,7 @@ const simulate = (capital, interest, years) => {
 //Microservicio Request
 
 const create = (data, userId) => {
-    return httpClient.post(`/api/request/create?userId=${userId}`, data, {
+    return httpClient.post(`api/request/create?userId=${userId}`, data, {
         headers: {
             'Content-Type': 'application/json', 
         },
@@ -25,42 +25,42 @@ const create = (data, userId) => {
 // Microservicio EvaluateCredit
 
 const getAll = () => {
-    return httpClient.get('/api/evaluate/getAll');
+    return httpClient.get('api/evaluate/getAll');
 }
 
 
 const evaluateStep1 = (creditId) => {
-    return httpClient.get(`/api/evaluate/R1/${creditId}`);
+    return httpClient.get(`api/evaluate/R1/${creditId}`);
 };
 
 const evaluateStep4 = (creditId) => {
-    return httpClient.get(`/api/evaluate/R4/${creditId}`);
+    return httpClient.get(`api/evaluate/R4/${creditId}`);
 };
 
 const evaluateStep5 = (creditId) => {
-    return httpClient.get(`/api/evaluate/R5/${creditId}`);
+    return httpClient.get(`api/evaluate/R5/${creditId}`);
 };
 
 const evaluateStep6 = (creditId) => {
-    return httpClient.get(`/api/evaluate/R6/${creditId}`);
+    return httpClient.get(`api/evaluate/R6/${creditId}`);
 };
 
 const totalCost = (creditId) =>{
-    return httpClient.get(`/api/evaluate/total/${creditId}`);
+    return httpClient.get(`api/evaluate/total/${creditId}`);
 };
 
 const update = (id, creditData) => {
-    return httpClient.put(`/api/evaluate/update/${id}`, creditData);
+    return httpClient.put(`api/evaluate/update/${id}`, creditData);
 };
 
 // Microservicio creditFollow
 
 const getAllById = (userId) => {
-    return httpClient.get(`/"api/follow"/getAll/${userId}`);
+    return httpClient.get(`api/follow/creditlist/${userId}`);
 };
 
 const follow1 = (creditId) =>{
-    return httpClient.get(`/api/v1/credits/E1/${creditId}`);
+    return httpClient.get(`api/follow/E1/${creditId}`);
 };
 
 

@@ -213,7 +213,7 @@ const CreditEvaluation = () => {
           <TableBody>
             {credits.map((credit) => (
               <TableRow key={credit.idCredit}>
-                <TableCell align="left">{credit.amount}</TableCell>
+                <TableCell align="left">{credit.capital}</TableCell>
                 <TableCell align="left">{credit.annual_interest}</TableCell>
                 <TableCell align="right">{credit.level}</TableCell>
                 
