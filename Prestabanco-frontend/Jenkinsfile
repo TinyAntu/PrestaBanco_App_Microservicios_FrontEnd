@@ -1,12 +1,12 @@
 pipeline {
     agent any
     tools {
-        nodejs 'NodeJS_20' 
+        nodejs 'NodeJS_21' 
     }
     stages {
         stage('Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/TinyAntu/PrestaBanco_App_Monolitica.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/TinyAntu/PrestaBanco_App_Microservicios_FrontEnd.git']])
                 
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         stage('Build docker image') {
             steps {
                 script {
-                    bat 'docker build -t tinyantu/prestabanco-frontend:latest -f Prestabanco-frontend/Dockerfile Prestabanco-frontend'
+                    bat 'docker build -t tinyantu/kubernetes-frontend:latest -f Prestabanco-frontend/Dockerfile Prestabanco-frontend'
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'dckhubpassword', variable: 'dhpsw')]) {
                         bat 'docker login -u tinyantu -p %dhpsw%'
                     }
-                    bat 'docker push tinyantu/prestabanco-frontend:latest' 
+                    bat 'docker push tinyantu/kubernetes-frontend:latest' 
                 }
             }
         }
