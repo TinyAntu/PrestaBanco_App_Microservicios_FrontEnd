@@ -22,11 +22,19 @@ const create = (data, userId) => {
     });
 };
 
-// Microservicio EvaluateCredit
+const update = (id, creditData) => {
+    return httpClient.put(`api/request/update/${id}`, creditData);
+};
 
 const getAll = () => {
     return httpClient.get('api/evaluate/getAll');
 }
+
+const getAllById = (userId) => {
+    return httpClient.get(`api/follow/creditlist/${userId}`);
+};
+
+// Microservicio EvaluateCredit
 
 
 const evaluateStep1 = (creditId) => {
@@ -49,15 +57,7 @@ const totalCost = (creditId) =>{
     return httpClient.get(`api/evaluate/total/${creditId}`);
 };
 
-const update = (id, creditData) => {
-    return httpClient.put(`api/evaluate/update/${id}`, creditData);
-};
-
 // Microservicio creditFollow
-
-const getAllById = (userId) => {
-    return httpClient.get(`api/follow/creditlist/${userId}`);
-};
 
 const follow1 = (creditId) =>{
     return httpClient.get(`api/follow/E1/${creditId}`);
