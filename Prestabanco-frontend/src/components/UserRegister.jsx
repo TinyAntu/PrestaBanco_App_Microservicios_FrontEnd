@@ -20,17 +20,33 @@ const UserRegister = () => {
     userService
       .register(user)
       .then((response) => {
-        const userId = response.data.id;
-        console.log("Usuario registrado exitosamente", response.data);
-        // Save userId and userTypeId in localStorage
-        localStorage.setItem("userId", userId);
-        localStorage.setItem("userTypeId", userRole);
-        console.log("API Response:", response);
-        alert("Usuario registrado correctamente");
-        navigate("/home");
+        const retryInterval = 500; // Tiempo entre intentos (en ms)
+        const maxRetries = 5; // Número máximo de intentos
+
+        const fetchUserId = (retryCount = 0) => {
+          if (response.data && response.data.id) {
+            const userId = response.data.id;
+            console.log("Usuario registrado exitosamente", response.data);
+
+            // Guardar en localStorage
+            localStorage.setItem("userId", userId);
+            localStorage.setItem("userTypeId", userRole);
+            alert("Usuario registrado correctamente");
+            navigate("/home");
+          } else if (retryCount < maxRetries) {
+            console.warn("Esperando que el backend devuelva la ID...");
+            setTimeout(() => fetchUserId(retryCount + 1), retryInterval);
+          } else {
+            console.error("No se pudo obtener la ID del usuario después de varios intentos.");
+            alert("Error al registrar el usuario. Por favor, intenta nuevamente.");
+          }
+        };
+
+        fetchUserId(); // Inicia el proceso de espera
       })
       .catch((error) => {
-        console.error("Error al registrar el usuario", error);
+        console.error("Error al registrar el usuario:", error);
+        alert("Error al registrar el usuario. Por favor, intenta nuevamente.");
       });
   };
 
